@@ -12,7 +12,7 @@
   <section class="section">
     <h2>Register</h2>
     <form action="/register" method="post">
-      @csrf;
+      @csrf
       <input type="text" name="name" placeholder="name">
       <input type="text" name="email" placeholder="email">
       <input type="text" name="password" placeholder="password">

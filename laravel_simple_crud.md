@@ -55,3 +55,29 @@ public function register() {
     return 'hello from controller';
 }
 ```
+
+Next, let's see if we can get data from an empty form submission.
+To do that we pass in an argument that will contain the request object, and then we dump it to see what is in it.
+
+```php
+public function register(Request $request) {
+    dd($request);
+    return;
+}
+```
+
+
+```php
++request:
+Symfony\Component\HttpFoundation
+\
+InputBag {#38 ▼
+    #parameters: array:5 [▼
+      "_token" => "Ku3uIrNzrPMvs0IB1bXwBs16Y43vQChhtp7pdyli"
+      "name" => null
+      "email" => null
+      "password" => null
+      "submit" => "Submit"
+    ]
+  }
+  ```
