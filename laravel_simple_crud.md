@@ -119,3 +119,25 @@ And the password should be between 8 and 200 characters long.
     return 'hello from controller';
 }
 ```
+
+## Connect Our App to a Local Database
+
+First, log into PhpMyAdmin at `127.0.0.1/phpmyadmin` and create a new database for this project.
+
+Database was named `laravel_crud_app_01`.
+User was default root.
+Password was default <no pass>.
+
+### Laravel Migrations
+
+Now we need table for our database. Instead of creating them in PhpMyAdmin, we will use Migrations to make our tables.
+
+To see what Migrations are, run the migrations script.
+
+```sh
+php artisan migrate
+```
+
+Now look refresh the screen in PhpMyAdmin and you will see that there are a number of tables there. Each migrate scrips creates, modifies, or deletes a table.
+
+Going forward, any time you run the migrate script Laravel will only run any new scripts that it finds.
