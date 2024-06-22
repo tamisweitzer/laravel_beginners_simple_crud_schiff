@@ -149,3 +149,23 @@ Going forward, any time you run the migrate script Laravel will only run any new
 In addition to the `users` table, Laravel gives us a User model as well. We will use this model to create a new instance of a User.
 
 user #1 is tami, tami@dev.com, tami
+
+```php
+public function register(Request $request) {
+    $incomingFields = $request->validate(
+        [
+            'name' => ['required', 'min:3', 'max:20'],
+            'email' => 'required',
+            'password' => 'required'
+        ]
+    );
+
+    // Hash user's password before putting it into the db. The bcrypt() function is built into Laravel.
+    $incomingFields['password'] = bcrypt($incomingFields['password']);
+
+    // Create an instance of a User.
+    User::create($incomingFields);
+
+    return 'hello from controller';
+}
+```
