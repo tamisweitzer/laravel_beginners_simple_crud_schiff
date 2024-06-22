@@ -9,15 +9,22 @@
 <body>
   <h1>Simple CRUD in Laravel</h1>
 
-  <section class="section">
-    <h2>Register</h2>
-    <form action="/register" method="post">
-      @csrf
-      <input type="text" name="name" placeholder="name">
-      <input type="text" name="email" placeholder="email">
-      <input type="text" name="password" placeholder="password">
-      <input type="submit" name="submit" value="Submit">
-    </form>
-  </section>
+  @auth
+    <section class="section">
+      <h2>Hello, you are logged in.</h2>
+    </section>
+  @else
+    <section class="section">
+      <h2>Register</h2>
+      <form action="/register" method="post">
+        @csrf
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="email" placeholder="email">
+        <input type="text" name="password" placeholder="password">
+        <input type="submit" name="submit" value="Submit">
+      </form>
+    </section>
+  @endauth
+
 </body>
 </html>

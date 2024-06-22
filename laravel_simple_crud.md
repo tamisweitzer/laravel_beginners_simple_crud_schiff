@@ -169,3 +169,10 @@ public function register(Request $request) {
     return 'hello from controller';
 }
 ```
+
+We can add a constraint to our table that ensures a new username and email are unique.
+
+```php
+// 'name' => ['required', 'min:3', 'max:20', Rule::unique('tablename', 'columnname')],
+'name' => ['required', 'min:3', 'max:20', Rule::unique('users', 'name')],
+```
