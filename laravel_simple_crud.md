@@ -176,3 +176,27 @@ We can add a constraint to our table that ensures a new username and email are u
 // 'name' => ['required', 'min:3', 'max:20', Rule::unique('tablename', 'columnname')],
 'name' => ['required', 'min:3', 'max:20', Rule::unique('users', 'name')],
 ```
+
+
+## Create Ability to Logout of App
+
+1. In the template, create a form with a button labelled logout. The form method  goes to route '/logout'.
+2. In the routes, create a route called logout that uses a function called 'logout' in the UserController.
+3. In the controller, create a 'logout' function that calls the globally available `auth()` function, look inside it and call the `logout` function.
+
+```php
+// Template: '/resources/views/home.blade.php'.
+<form action="/logout" method="post">
+  @csrf
+  <button>Logout</button>
+</form>
+
+// Routes: '/routes/web.php'.
+Route::post('/logout', [UserController::class, 'logout']);
+
+// Controller: '/app/Http/Controllers/UserController.php'
+public function logout() {
+  auth()->logout();
+  redirect('/');
+}
+```

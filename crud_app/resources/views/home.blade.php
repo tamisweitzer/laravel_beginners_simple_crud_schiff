@@ -12,6 +12,10 @@
   @auth
     <section class="section">
       <h2>Hello, you are logged in.</h2>
+      <form action="/logout" method="post">
+        @csrf
+        <button>Logout</button>
+      </form>
     </section>
   @else
     <section class="section">
