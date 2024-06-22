@@ -1,0 +1,18 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+ label.text {
+  display: block;
+ }
+input {
+  padding: .3rem .5rem;
+}
+input[name='submit'] {
+  padding: .3rem 1rem;
+}
+
+ .section {
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+ }
