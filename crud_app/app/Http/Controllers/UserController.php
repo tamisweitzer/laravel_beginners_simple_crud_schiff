@@ -8,7 +8,13 @@ class UserController extends Controller {
 
 
     public function register(Request $request) {
-        dd($request);
+        $incomingFields = $request->validate(
+            [
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required'
+            ]
+        );
         return 'hello from controller';
     }
 }
