@@ -140,4 +140,12 @@ php artisan migrate
 
 Now look refresh the screen in PhpMyAdmin and you will see that there are a number of tables there. Each migrate scrips creates, modifies, or deletes a table.
 
+One of the tables included in the default scripts is the `users` table. We will use this for our app.
+
 Going forward, any time you run the migrate script Laravel will only run any new scripts that it finds.
+
+### Models
+
+In addition to the `users` table, Laravel gives us a User model as well. We will use this model to create a new instance of a User.
+
+user #1 is tami, tami@dev.com, tami

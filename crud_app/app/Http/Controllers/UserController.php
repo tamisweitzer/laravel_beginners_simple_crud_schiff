@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
@@ -15,6 +16,13 @@ class UserController extends Controller {
                 'password' => 'required'
             ]
         );
+
+        // Hash user's password before putting it into the db.
+        $incomingFields['password'] = bcrypt($incomingFields['password']);
+
+        // Create an instance of a User.
+        User::create($incomingFields);
+
         return 'hello from controller';
     }
 }
