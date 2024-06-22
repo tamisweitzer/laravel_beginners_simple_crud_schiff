@@ -81,3 +81,41 @@ InputBag {#38 ▼
     ]
   }
   ```
+
+## Validating User Input from the Form
+
+A very simple validation is to make sure all fields were filled in.
+
+```php
+  public function register(Request $request) {
+      $incomingFields = $request->validate(
+          [
+              'name' => 'required',
+              'email' => 'required',
+              'password' => 'required'
+          ]
+      );
+      return 'hello from controller';
+  }
+```
+
+A more realistic approach is to ensure additional parameters.
+
+Here we declare the username should be a minimum of two characters, and a maximum of 20.
+
+The email should be in the pattern of an email address.
+
+And the password should be between 8 and 200 characters long.
+
+```php
+ public function register(Request $request) {
+    $incomingFields = $request->validate(
+        [
+            'name' => ['required', 'min:3', 'max:20'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8', 'max:200']
+        ]
+    );
+    return 'hello from controller';
+}
+```
