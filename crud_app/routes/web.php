@@ -17,9 +17,12 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    $posts = Post::all();
+    // Current user id
+    $user_id = auth()->id();
+    // Find posts of logged in user.
+    $posts = Post::where('user_id', $user_id)->get();
     // The 'posts' key becomes a variable that is available to the template.
-    return view('home', ['posts' => $posts]);
+    return view('home', ['posts' => $posts, 'user_id' => $user_id]);
 });
 
 Route::post('/register', [UserController::class, 'register']);

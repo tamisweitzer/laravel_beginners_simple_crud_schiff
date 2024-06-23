@@ -279,3 +279,54 @@ public function down(): void
     Schema::dropIfExists('posts');
 }
 ```
+
+## Posts Controller, Model, and Route
+
+We add a route for creating a new blog post.
+
+```php
+// Blog post routes
+Route::post('/create-post', [PostController::class, 'createPost']);
+```
+
+Then we create the controller and model in the terminal.
+
+```sh
+// Controller:
+php artisan make:controller PostController
+
+// Model: the naming scheme is the singular, upper-case version of the table name.
+php artisan make:model Post
+```
+
+In the Post model we just have to declare the fillable fields. These fillable fields means that when we create a new record in the database, we are telling Laravel that the following fields can all be assigned at once.
+
+```php
+protected $fillable = [
+    'title',
+    'body',
+    'user_id',
+];
+```
+
+In the controller, we create a method for creating a new blog post.
+
+```php
+public function createPost(Request $request) {
+    $incomingFields = $request->validate([
+        'title' => 'required',
+        'body' => 'required'
+    ]);
+
+    // Strip out any HTML tags for safety.
+    $incomingFields['title'] = strip_tags($incomingFields['title']);
+    $incomingFields['body'] = strip_tags($incomingFields['body']);
+    $incomingFields['user_id'] = auth()->id();
+
+    // Call the create() method from the Post controller.
+    Post::create($incomingFields);
+
+    // As always, redirect to the home page when done.
+    return redirect('/');
+}
+```

@@ -12,7 +12,7 @@
   @auth
    <!-- If user is logged in -->
     <section class="section">
-      <h2>Hello, you are logged in.</h2>
+      <h2>Welcome, User <?= $user_id ?>.</h2>
       <form action="/logout" method="post">
         @csrf
         <button>Logout</button>
@@ -33,16 +33,17 @@
       <h2>All Posts</h2>
       <div>
         @foreach($posts as $post)
-          <div style="margin-bottom:.5rem;">
+        <div style="background-color:#f5f5f5; padding:1rem; margin-bottom: 2rem;">
+          <h3 style="margin-bottom:.5rem;">
             {{ $post['title']}}
-          </div>
+          </h3>
           <div style="margin-bottom:.5rem;">
             {{ $post['body']}}
           </div>
           <div style="margin-bottom:2rem;">
             Written by: {{ $post['user_id']}}
           </div>
-          <hr>
+        </div>
         @endforeach
       </div>
     </section>
