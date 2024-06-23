@@ -20,7 +20,8 @@ Route::get('/', function () {
     // Current user id
     $user_id = auth()->id();
     // Find posts of logged in user.
-    $posts = Post::where('user_id', $user_id)->get();
+    // $posts = Post::where('user_id', $user_id)->get();
+    $posts = auth()->user()->usersCoolPosts()->latest()->get();
     // The 'posts' key becomes a variable that is available to the template.
     return view('home', ['posts' => $posts, 'user_id' => $user_id]);
 });

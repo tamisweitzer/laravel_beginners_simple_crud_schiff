@@ -330,3 +330,27 @@ public function createPost(Request $request) {
     return redirect('/');
 }
 ```
+
+Modify the home route so that it can receive the blog posts.
+
+```php
+Route::get('/', function () {
+    // Current user id
+    $user_id = auth()->id();
+    // Find posts of logged in user.
+    $posts = Post::where('user_id', $user_id)->get();
+    // The 'posts' key becomes a variable that is available to the template.
+    return view('home', ['posts' => $posts, 'user_id' => $user_id]);
+});
+```
+
+This all works, but we are not taking advantage of the model's ability to create relationships between data. To do that we modify how we get the user's posts.
+
+```php
+Route::get('/', function () {
+    ...
+    // $posts = Post::where('user_id', $user_id)->get();
+    $posts = auth()->user()->usersCoolPosts()->latest()->get();
+    ...
+});
+```
