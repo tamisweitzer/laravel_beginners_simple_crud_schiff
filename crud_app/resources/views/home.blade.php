@@ -33,17 +33,17 @@
       <h2>All Posts</h2>
       <div>
         @foreach($posts as $post)
-        <div style="background-color:#f5f5f5; padding:1rem; margin-bottom: 2rem;">
-          <h3 style="margin-bottom:.5rem;">
-            {{ $post['title']}}
-          </h3>
-          <div style="margin-bottom:.5rem;">
-            {{ $post['body']}}
+          <div style="background-color:#f5f5f5; padding:1rem; margin-bottom: 2rem;">
+            <h3 style="margin-bottom:.5rem;">
+              {{ $post['title']}}
+            </h3>
+            <div style="margin-bottom:.5rem;">
+              {{ $post['body']}}
+            </div>
+            <div style="margin-bottom:2rem;">
+              Written by: {{ $post['user_id']}}
+            </div>
           </div>
-          <div style="margin-bottom:2rem;">
-            Written by: {{ $post['user_id']}}
-          </div>
-        </div>
         @endforeach
       </div>
     </section>
