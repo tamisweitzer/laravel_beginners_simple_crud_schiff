@@ -17,13 +17,13 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    // Current user id
-    $user_id = auth()->id();
     // Find posts of logged in user.
-    // $posts = Post::where('user_id', $user_id)->get();
-    $posts = auth()->user()->usersCoolPosts()->latest()->get();
-    // The 'posts' key becomes a variable that is available to the template.
-    return view('home', ['posts' => $posts, 'user_id' => $user_id]);
+    // Avoid throwing an error when user is not logged in by doing a check.
+    $posts = [];
+    if (auth()->check()) {
+        $posts = auth()->user()->usersCoolPosts()->latest()->get();
+    }
+    return view('home', ['posts' => $posts, 'user_id' => auth()->id()]);
 });
 
 Route::post('/register', [UserController::class, 'register']);
