@@ -354,3 +354,68 @@ Route::get('/', function () {
     ...
 });
 ```
+
+## Edit a Post
+
+To edit a post we want to:
+1. Create edit button.
+  In the template, add an anchor tag and set the href to the route that will handle the edits.
+
+2. Create a GET route for the edit.
+  The GET route calls a controller that will redirect us to a page with a form that has the blog post title and body filled in. You can make any edits here and click a button the save the changes.
+  Clicking the button will forward everything to the PUT route.
+
+3. Create a PUT route for the edit.
+  The PUT route calls a controller that will send the updated blog post to the database.
+
+```php
+// Template
+<div style="margin-bottom:.5rem;">
+  {{ $post['body']}}
+  <p>
+    <a href="/edit-post/{{$post->id}}">Edit</a>
+  </p>
+</div>
+
+// Routes
+Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
+Route::put('/edit-post/{post}', [PostController::class, 'actuallyUpdatePost']);
+
+// Controller for GET Request
+public function showEditScreen(Post $post) {
+     if (auth()->user() == null) {
+         return redirect('/');
+     }
+
+     if (auth()->user()->id !== $post['user_id']) {
+         return redirect('/');
+     }
+     return view('edit-post', ['post' => $post]);
+ }
+
+// Controller for PUT Request
+public function actuallyUpdatePost(Post $post, Request $request) {
+     // If an unauthorized user got here somehow, send them back to the home page.
+     if (auth()->user() == null) {
+         return redirect('/');
+     }
+
+     // Make sure the correct user is trying to edit the post.
+     if (auth()->user()->id !== $post['user_id']) {
+         return redirect('/');
+     }
+
+     $incomingFields = $request->validate([
+         'title' => 'required',
+         'body' => 'required'
+     ]);
+
+     $incomingFields['title'] = strip_tags($incomingFields['title']);
+     $incomingFields['body'] = strip_tags($incomingFields['body']);
+
+     $post->update($incomingFields);
+
+     return redirect('/');
+ }
+
+```

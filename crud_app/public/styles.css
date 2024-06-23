@@ -20,6 +20,19 @@ input[name='submit'] {
   width: 100%;
 }
 
+.posts textarea {
+  min-height: 7rem;
+}
+
+.edit-form input, .edit-form textarea {
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.edit-form textarea {
+  min-height: 7rem;
+}
 .section {
 border: 1px solid #ddd;
 margin-bottom: 1rem;

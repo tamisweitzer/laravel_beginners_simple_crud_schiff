@@ -39,6 +39,12 @@
             </h3>
             <div style="margin-bottom:.5rem;">
               {{ $post['body']}}
+              <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
+              <form action="/delete-post/{{$post->id}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button>Delete</button>
+              </form>
             </div>
             <div style="margin-bottom:2rem;">
               Written by: {{ $post['user_id']}}

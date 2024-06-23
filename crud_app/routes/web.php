@@ -27,9 +27,10 @@ Route::get('/', function () {
 });
 
 Route::post('/register', [UserController::class, 'register']);
-
 Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
 // Blog post routes
 Route::post('/create-post', [PostController::class, 'createPost']);
+Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
+Route::put('/edit-post/{post}', [PostController::class, 'actuallyUpdatePost']);
