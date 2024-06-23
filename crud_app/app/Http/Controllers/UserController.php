@@ -16,9 +16,9 @@ class UserController extends Controller {
     public function register(Request $request) {
         $incomingFields = $request->validate(
             [
-                'name' => ['required', 'min:3', 'max:20', Rule::unique('users', 'name')],
-                'email' => ['required', Rule::unique('users', 'email')],
-                'password' => ['required', 'min:8', 'max:100']
+                'name' => ['required', 'min:3', 'max:20'],
+                'email' => 'required',
+                'password' => 'required'
             ]
         );
 
@@ -30,7 +30,8 @@ class UserController extends Controller {
 
         // Automatically log in the user after creation.
         auth()->login($user);
-        // Redirect to the home page after login.
+
+        // Redirect logged in user to home page.
         return redirect('/');
     }
 }
