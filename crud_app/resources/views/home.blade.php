@@ -10,6 +10,7 @@
   <h1>Simple CRUD in Laravel</h1>
 
   @auth
+   <!-- If user is logged in -->
     <section class="section">
       <h2>Hello, you are logged in.</h2>
       <form action="/logout" method="post">
@@ -17,7 +18,18 @@
         <button>Logout</button>
       </form>
     </section>
+
+    <section class="section posts">
+      <h2>Create a New Post</h2>
+      <form action="/create-post" method="POST">
+        @csrf
+        <input type="text" name="title" placeholder="post title">
+        <textarea name="body" placeholder="body content..."></textarea>
+        <input type="submit" name="save-post" value="Save post">
+      </form>
+    </section>
   @else
+  <!-- If user is not logged in -->
     <section class="section">
       <h2>Login</h2>
       <form action="/login" method="post">

@@ -245,3 +245,37 @@ For whatever reason, I cannot set a min or max password length in the validate f
 ```
 
 I don't see any specific errors in the error logs, `/storage/logs/laravel.log`, or in the web page.
+
+
+## Create a Blog Posts Table using Migrations
+
+We will use migrations to create a new table for our blog posts.
+
+If we use a good naming scheme, the migration will try to add in sensible methods for us.
+
+```sh
+php artisan make:migration create_posts_table
+```
+
+This created a migration file with two methods: and up() and a down(), for creating a table, and dropping a table.
+
+```php
+/**
+ * Run the migrations.
+ */
+public function up(): void
+{
+    Schema::create('posts', function (Blueprint $table) {
+        $table->id();
+        $table->timestamps();
+    });
+}
+
+/**
+ * Reverse the migrations.
+ */
+public function down(): void
+{
+    Schema::dropIfExists('posts');
+}
+```
