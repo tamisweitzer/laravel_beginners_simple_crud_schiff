@@ -200,3 +200,48 @@ public function logout() {
   redirect('/');
 }
 ```
+
+## Max Password Length
+
+Originally, I had set the max password length to be 100 characters. This broke caused user registration to fail.
+
+It turns out that the dcrypt script allows a max length of 72 characters.
+
+```text
+Password hashing in Laravel is done with bcrypt , and internally bcrypt has a maximum password length of 72 characters. Anything beyond that is truncated.Feb 5, 2024
+Source: https://masteringlaravel.io/daily/2024-02-05-why-does-laravel-offer-a-max-password-length-validation-rule#:~:text=Password%20hashing%20in%20Laravel%20is,Anything%20beyond%20that%20is%20truncated.
+```
+
+
+```php
+ $incomingFields = $request->validate(
+   [
+       'name' => ['required', 'min:3', 'max:20', Rule::unique('users', 'name')],
+       'email' => ['required', Rule::unique('users', 'email')],
+       'password' => ['required', 'min:8', 'max:72']
+   ]
+);
+```
+
+Still not working.
+
+Turned ON debugging messages in `/config/app.php`.
+
+```php
+- 'debug' => (bool) env('APP_DEBUG', false),
++ 'debug' => (bool) env('APP_DEBUG', true),
+```
+
+For whatever reason, I cannot set a min or max password length in the validate function. There must have been a change in Laravel since this video was recorded, because as of today, the only thing that works is the required parameter.
+
+```php
+ $incomingFields = $request->validate(
+   [
+       'name' => ['required', 'min:3', 'max:20', Rule::unique('users', 'name')],
+       'email' => ['required', Rule::unique('users', 'email')],
+       'password' => ['required']
+   ]
+);
+```
+
+I don't see any specific errors in the error logs, `/storage/logs/laravel.log`, or in the web page.
