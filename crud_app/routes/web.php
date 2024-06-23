@@ -23,7 +23,7 @@ Route::get('/', function () {
     if (auth()->check()) {
         $posts = auth()->user()->usersCoolPosts()->latest()->get();
     }
-    return view('home', ['posts' => $posts, 'user_id' => auth()->id()]);
+    return view('home', ['posts' => $posts]);
 });
 
 Route::post('/register', [UserController::class, 'register']);

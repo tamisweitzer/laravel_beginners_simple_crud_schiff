@@ -18,4 +18,9 @@ class Post extends Model {
         'body',
         'user_id',
     ];
+
+    // Create a relationship between a Post and a User so that we know who the author is.
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

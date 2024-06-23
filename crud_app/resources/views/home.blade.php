@@ -12,7 +12,7 @@
   @auth
    <!-- If user is logged in -->
     <section class="section">
-      <h2>Welcome, User <?= $user_id ?>.</h2>
+      <h2>Welcome, User</h2>
       <form action="/logout" method="post">
         @csrf
         <button>Logout</button>
@@ -47,7 +47,7 @@
               </form>
             </div>
             <div style="margin-bottom:2rem;">
-              Written by: {{ $post['user_id']}}
+              Written by {{ $post->user->name }}
             </div>
           </div>
         @endforeach
