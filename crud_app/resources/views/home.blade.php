@@ -28,6 +28,24 @@
         <input type="submit" name="save-post" value="Save post">
       </form>
     </section>
+
+    <section class="section">
+      <h2>All Posts</h2>
+      <div>
+        @foreach($posts as $post)
+          <div style="margin-bottom:.5rem;">
+            {{ $post['title']}}
+          </div>
+          <div style="margin-bottom:.5rem;">
+            {{ $post['body']}}
+          </div>
+          <div style="margin-bottom:2rem;">
+            Written by: {{ $post['user_id']}}
+          </div>
+          <hr>
+        @endforeach
+      </div>
+    </section>
   @else
   <!-- If user is not logged in -->
     <section class="section">

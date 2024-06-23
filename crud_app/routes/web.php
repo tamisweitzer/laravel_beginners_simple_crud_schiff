@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -16,7 +17,9 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $posts = Post::all();
+    // The 'posts' key becomes a variable that is available to the template.
+    return view('home', ['posts' => $posts]);
 });
 
 Route::post('/register', [UserController::class, 'register']);
