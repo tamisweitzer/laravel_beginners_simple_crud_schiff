@@ -419,3 +419,33 @@ public function actuallyUpdatePost(Post $post, Request $request) {
  }
 
 ```
+
+## Delete a Blog Post
+
+The process to delete a post is very similar to editing.
+
+```php
+// Template
+<form action="/delete-post/{{$post->id}}" method="POST">
+ @csrf
+ @method('DELETE')
+ <button>Delete</button>
+</form>
+
+// Route
+Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
+
+// Controller
+public function deletePost(Post $post) {
+  // If an unauthorized user got here somehow, send them back to the home page.
+  if (auth()->user() == null) {
+      return redirect('/');
+  }
+
+  // Make sure the correct user is trying to edit the post.
+  if (auth()->user()->id === $post['user_id']) {
+      $post->delete();
+  }
+  return redirect('/');
+}
+```

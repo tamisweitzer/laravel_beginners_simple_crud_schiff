@@ -7,6 +7,19 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller {
 
+    public function deletePost(Post $post) {
+        // If an unauthorized user got here somehow, send them back to the home page.
+        if (auth()->user() == null) {
+            return redirect('/');
+        }
+
+        // Make sure the correct user is trying to edit the post.
+        if (auth()->user()->id === $post['user_id']) {
+            $post->delete();
+        }
+        return redirect('/');
+    }
+
     public function actuallyUpdatePost(Post $post, Request $request) {
         // If an unauthorized user got here somehow, send them back to the home page.
         if (auth()->user() == null) {
