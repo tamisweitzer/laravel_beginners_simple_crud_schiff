@@ -19,6 +19,16 @@
     </section>
   @else
     <section class="section">
+      <h2>Login</h2>
+      <form action="/login" method="post">
+        @csrf
+        <input type="text" name="loginname" placeholder="name">
+        <input type="text" name="loginpassword" placeholder="password">
+        <input type="submit" name="loginsubmit" value="Login">
+      </form>
+    </section>
+
+    <section class="section">
       <h2>Register</h2>
       <form action="/register" method="post">
         @csrf
