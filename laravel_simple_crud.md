@@ -449,3 +449,5 @@ public function deletePost(Post $post) {
   return redirect('/');
 }
 ```
+
+The End.
